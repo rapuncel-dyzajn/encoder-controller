@@ -10,4 +10,4 @@ substitutions:
   encoder_factor_4: "0.01" # NOTE: 100P/R
 
 packages:
-  base: !include esphome/base.yaml
+  base: !include ../esphome/base.yaml

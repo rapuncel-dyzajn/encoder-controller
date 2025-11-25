@@ -33,9 +33,14 @@ ota:
   platform: esphome
 
 i2c:
-  sda: GPIO13
-  scl: GPIO14
-  frequency: 800kHz
+  sda: GPIO21
+  scl: GPIO22
+  frequency: 100kHz
+
+pcf8574:
+  - id: pcf8574_hub
+    address: 0x39
+    pcf8575: false
 
 globals:
   - id: menu_editing
@@ -145,32 +150,31 @@ packages:
     file: machine.yaml
     vars:
       machine_index: "${machine_index_1}"
-      output_pin: GPIO23
-      encoder_pin_a: GPIO21
-      encoder_pin_b: GPIO19
+      output_pin: 2
+      encoder_pin_a: GPIO13
+      encoder_pin_b: GPIO14
       encoder_factor: "${encoder_factor_1}"
   machine_2: !include
     file: machine.yaml
     vars:
       machine_index: "${machine_index_2}"
-      output_pin: GPIO22
-      encoder_pin_a: GPIO18
-      encoder_pin_b: GPIO17
+      output_pin: 0
+      encoder_pin_a: GPIO16
+      encoder_pin_b: GPIO04
       encoder_factor: "${encoder_factor_2}"
   machine_3: !include
     file: machine.yaml
     vars:
       machine_index: "${machine_index_3}"
-      output_pin: GPIO1
-      encoder_pin_a: GPIO16
-      encoder_pin_b: GPIO4
+      output_pin: 6
+      encoder_pin_a: GPIO18
+      encoder_pin_b: GPIO17
       encoder_factor: "${encoder_factor_3}"
   machine_4: !include
     file: machine.yaml
     vars:
       machine_index: "${machine_index_4}"
-      # output_pin: GPIO3
-      output_pin: GPIO27
-      encoder_pin_a: GPIO2
-      encoder_pin_b: GPIO15
+      output_pin: 4
+      encoder_pin_a: GPIO23
+      encoder_pin_b: GPIO19
       encoder_factor: "${encoder_factor_4}"

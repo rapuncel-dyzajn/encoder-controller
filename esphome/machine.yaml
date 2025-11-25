@@ -24,10 +24,10 @@ switch:
     id: "relay_${machine_index}"
     name: "Relay ${machine_index}"
     pin:
+      pcf8574: pcf8574_hub
       number: "${output_pin}"
       mode:
         output: true
-        pulldown: true
     icon: mdi:pause
     web_server:
       sorting_group_id: group_machine_${machine_index}
