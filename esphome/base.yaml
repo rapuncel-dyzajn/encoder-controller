@@ -35,7 +35,7 @@ ota:
 i2c:
   sda: GPIO21
   scl: GPIO22
-  frequency: 800kHz
+  frequency: 100kHz
 
 pcf8574:
   - id: pcf8574_hub
