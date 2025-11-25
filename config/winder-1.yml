@@ -1,0 +1,13 @@
+substitutions:
+  index: "1"
+  machine_index_1: "1"
+  machine_index_2: "2"
+  machine_index_3: "3"
+  machine_index_4: "4"
+  encoder_factor_1: "0.0025" # NOTE: 400P/R
+  encoder_factor_2: "0.01" # NOTE: 100P/R
+  encoder_factor_3: "0.01" # NOTE: 100P/R
+  encoder_factor_4: "0.01" # NOTE: 100P/R
+
+packages:
+  base: !include ../esphome/base.yaml
