@@ -151,6 +151,7 @@ packages:
     vars:
       machine_index: "${machine_index_1}"
       output_pin: 2
+      run_pin: 3
       encoder_pin_a: GPIO13
       encoder_pin_b: GPIO14
       encoder_factor: "${encoder_factor_1}"
@@ -159,6 +160,7 @@ packages:
     vars:
       machine_index: "${machine_index_2}"
       output_pin: 0
+      run_pin: 1
       encoder_pin_a: GPIO16
       encoder_pin_b: GPIO04
       encoder_factor: "${encoder_factor_2}"
@@ -167,6 +169,7 @@ packages:
     vars:
       machine_index: "${machine_index_3}"
       output_pin: 6
+      run_pin: 7
       encoder_pin_a: GPIO18
       encoder_pin_b: GPIO17
       encoder_factor: "${encoder_factor_3}"
@@ -175,6 +178,7 @@ packages:
     vars:
       machine_index: "${machine_index_4}"
       output_pin: 4
+      run_pin: 5
       encoder_pin_a: GPIO23
       encoder_pin_b: GPIO19
       encoder_factor: "${encoder_factor_4}"

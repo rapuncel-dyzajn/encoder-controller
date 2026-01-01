@@ -1,3 +1,33 @@
+script:
+  - id: "watchdog_${machine_index}"
+    mode: restart
+    then:
+      - delay: 3s
+      - if:
+          condition:
+            binary_sensor.is_on: "run_status_${machine_index}"
+          then:
+            - switch.turn_on: "relay_${machine_index}"
+
+binary_sensor:
+  - platform: gpio
+    id: "run_status_${machine_index}"
+    pin:
+      pcf8574: pcf8574_hub
+      number: "${run_pin}"
+      mode:
+        input: true
+      inverted: true
+    name: "Run status ${machine_index}"
+    device_class: moving
+    icon: mdi:run
+    web_server:
+      sorting_group_id: group_machine_${machine_index}
+    on_press:
+      - script.execute: "watchdog_${machine_index}"
+    on_release:
+      - script.stop: "watchdog_${machine_index}"
+
 number:
   - platform: template
     id: "length_${machine_index}"
@@ -71,6 +101,7 @@ sensor:
       - round: 0
       - delta: 1
     on_value:
+      - script.execute: "watchdog_${machine_index}"
       - number.set:
           id: "length_${machine_index}"
           value: !lambda |-
