@@ -1,13 +1,33 @@
+globals:
+  - id: "warmup_done_${machine_index}"
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
 script:
   - id: "watchdog_${machine_index}"
     mode: restart
     then:
+      - if:
+          condition:
+            lambda: "return !id(warmup_done_${machine_index});"
+          then:
+            - script.stop: "watchdog_${machine_index}"
       - delay: 3s
       - if:
           condition:
             binary_sensor.is_on: "run_status_${machine_index}"
           then:
             - switch.turn_on: "relay_${machine_index}"
+
+  - id: "warmup_${machine_index}"
+    mode: restart
+    then:
+      - delay: 40s
+      - globals.set:
+          id: "warmup_done_${machine_index}"
+          value: "true"
+      - script.execute: "watchdog_${machine_index}"
 
 binary_sensor:
   - platform: gpio
@@ -24,9 +44,13 @@ binary_sensor:
     web_server:
       sorting_group_id: group_machine_${machine_index}
     on_press:
-      - script.execute: "watchdog_${machine_index}"
+      - script.execute: "warmup_${machine_index}"
     on_release:
+      - script.stop: "warmup_${machine_index}"
       - script.stop: "watchdog_${machine_index}"
+      - globals.set:
+          id: "warmup_done_${machine_index}"
+          value: "false"
 
 number:
   - platform: template
