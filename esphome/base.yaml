@@ -1,7 +1,6 @@
 substitutions:
   device_name: winder-${index}
   toggle_relay_below: "100"
-  m_per_revolution: "0.174"
 
 esphome:
   name: "${device_name}"
@@ -11,26 +10,12 @@ esp32:
   framework:
     type: arduino
 
-wifi:
-  ap:
-    ssid: "${device_name}"
-    password: winder123
-
-captive_portal:
-
-improv_serial:
-
 logger:
   level: DEBUG
   logs:
     component: ERROR
     number: INFO
     sensor: INFO
-
-api:
-
-ota:
-  platform: esphome
 
 i2c:
   sda: GPIO21
@@ -129,22 +114,6 @@ lcd_menu:
       vars:
         machine_index: "${machine_index_4}"
 
-web_server:
-  version: 3
-  sorting_groups:
-    - id: "group_machine_${machine_index_1}"
-      name: "M${machine_index_1}"
-      sorting_weight: 51
-    - id: "group_machine_${machine_index_2}"
-      name: "M${machine_index_2}"
-      sorting_weight: 52
-    - id: "group_machine_${machine_index_3}"
-      name: "M${machine_index_3}"
-      sorting_weight: 53
-    - id: "group_machine_${machine_index_4}"
-      name: "M${machine_index_4}"
-      sorting_weight: 54
-
 packages:
   machine_1: !include
     file: machine.yaml
@@ -155,6 +124,7 @@ packages:
       encoder_pin_a: GPIO13
       encoder_pin_b: GPIO14
       encoder_factor: "${encoder_factor_1}"
+      m_per_revolution: "${encoder_revolution_len_1}"
   machine_2: !include
     file: machine.yaml
     vars:
@@ -164,6 +134,7 @@ packages:
       encoder_pin_a: GPIO16
       encoder_pin_b: GPIO04
       encoder_factor: "${encoder_factor_2}"
+      m_per_revolution: "${encoder_revolution_len_2}"
   machine_3: !include
     file: machine.yaml
     vars:
@@ -173,6 +144,7 @@ packages:
       encoder_pin_a: GPIO18
       encoder_pin_b: GPIO17
       encoder_factor: "${encoder_factor_3}"
+      m_per_revolution: "${encoder_revolution_len_3}"
   machine_4: !include
     file: machine.yaml
     vars:
@@ -182,3 +154,4 @@ packages:
       encoder_pin_a: GPIO23
       encoder_pin_b: GPIO19
       encoder_factor: "${encoder_factor_4}"
+      m_per_revolution: "${encoder_revolution_len_4}"

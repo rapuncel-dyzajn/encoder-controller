@@ -41,8 +41,6 @@ binary_sensor:
     name: "Run status ${machine_index}"
     device_class: moving
     icon: mdi:run
-    web_server:
-      sorting_group_id: group_machine_${machine_index}
     on_press:
       - script.execute: "warmup_${machine_index}"
     on_release:
@@ -66,8 +64,6 @@ number:
     device_class: distance
     unit_of_measurement: m
     icon: mdi:sync
-    web_server:
-      sorting_group_id: group_machine_${machine_index}
     on_value_range:
       below: "${toggle_relay_below}"
       then:
@@ -80,11 +76,11 @@ switch:
     pin:
       pcf8574: pcf8574_hub
       number: "${output_pin}"
+      # TODO: Support control by ground in next HW version. Support backward compatibility.
+      # inverted: true
       mode:
         output: true
     icon: mdi:pause
-    web_server:
-      sorting_group_id: group_machine_${machine_index}
     on_turn_on:
       - delay: 250ms
       - switch.turn_off: "relay_${machine_index}"
@@ -93,8 +89,6 @@ button:
   - platform: template
     name: "Reset encoder ${machine_index}"
     icon: mdi:numeric-0-circle
-    web_server:
-      sorting_group_id: group_machine_${machine_index}
     on_press:
       - sensor.rotary_encoder.set_value:
           id: "encoder_${machine_index}"
@@ -118,8 +112,6 @@ sensor:
         input: true
         pullup: true
     icon: mdi:rotate-right
-    web_server:
-      sorting_group_id: group_machine_${machine_index}
     filters:
       - multiply: ${encoder_factor}
       - round: 0
